@@ -21,7 +21,7 @@
 // * Some flashcart only return to menu when long resetting.
 //
 ////////////////////////////////////////////////////////////
-//               INSTALLATION GUIDE:
+//               INSTALLATION GUIDE:                      //
 ////////////////////////////////////////////////////////////
 //            __________________________
 //           | Arduino  | SNES          |
