@@ -16,7 +16,7 @@
 // this mod turns the CIC off and reset the console automatically.
 //
 // 🔄 Press L + R + START + LEFT to reset.
-// 🔄 Press L + R + START + LEFT to long reset*.
+// 🔄 Press L + R + START + DOWN to long reset*.
 // 🔒 Press L + R + START + RIGHT to toggle the CIC off forcefully.
 // * Some flashcart only return to menu when long resetting.
 //
