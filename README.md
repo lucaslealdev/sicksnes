@@ -10,7 +10,7 @@ sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allow
 - **LED indicators** for CIC status
 
 ### Controls
-- 🔄 **Soft Reset:** Press `L + R + START + SELECT`
+- 🔄 **Soft Reset:** Press `L + R + START + LEFT`
 - 🔄 **Long Reset:** Press `L + R + START + DOWN` (Some flashcarts only return to the menu with long reset)
 - 🔒 **Forcefully Disable CIC:** Press `L + R + START + RIGHT`
 
