@@ -44,7 +44,7 @@ Connect the Arduino to the SNES board as follows:
         |  •    •  |
         |          |
         |          |
-        | VIN   D4 |
+        | 5V    D4 |
          ‾‾‾‾‾‾‾‾‾‾
 ```
 
