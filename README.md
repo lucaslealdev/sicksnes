@@ -96,6 +96,22 @@ If the Arduino is flashed via USB (with a bootloader), and *Street Fighter Alpha
 
 **Note:** This issue is rare and only affects *Street Fighter Alpha 2* on certain SNES consoles.
 
+## Already tested  
+
+| SNES Model         | With bootloader (via usb) | No bootloader (USBasp) |
+|------------------------|--------------------------------|--------------------------------|
+| SNS-CPU-1CHIP-02      | ✅ Full                     | ✅ Full |
+| SNS-CPU-1CHIP-03      | ⚠️ Need SFA2 workaround   | ✅ Full |
+
+### Help Improve Compatibility!  
+
+If you test this mod on a different SNES model, please share your results!  
+Let us know which console you used and whether everything worked as expected.  
+
+This will help improve the compatibility list for future users.  
+
+Thank you for your contribution! 🎮🔥
+
 ---
 
 ## Credits
