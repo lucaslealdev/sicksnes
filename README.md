@@ -14,6 +14,9 @@ sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allow
 - 🔄 **Long Reset:** Press `L + R + START + DOWN` (Some flashcarts only return to the menu with long reset)
 - 🔒 **Forcefully Disable CIC:** Press `L + R + START + RIGHT`
 
+### Quick demo
+[https://youtu.be/vH6iCG8fFg8](https://youtu.be/vH6iCG8fFg8)
+
 ---
 
 ## Installation Guide
