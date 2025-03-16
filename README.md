@@ -89,7 +89,7 @@ For some consoles, *Street Fighter Alpha 2* may require a faster startup. To ach
 
 ### Workaround for *Street Fighter Alpha 2* (If Bootloader is Used)
 If the Arduino is flashed via USB (with a bootloader), and *Street Fighter Alpha 2* does not boot properly on your console:
-- Hold the **reset button** until the Arduino initializes (~1.8s after power-up). This allows the game to start *before* the Arduino executes its code.
+- Hold the **reset button** until the Arduino initializes (~1.8s after power-up). This allows the game to start *after* the Arduino executes its code.
 
 **Note:** This issue is rare and only affects *Street Fighter Alpha 2* on certain SNES consoles.
 
