@@ -6,7 +6,7 @@ sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allow
 ### Features
 - **Automatic lockout chip toggle**
 - **In-game reset functionality** using controller input
-- **Compatibility with most SNES consoles**
+- **Compatibility with all SNES consoles**
 - **LED indicators** for CIC status
 
 ### Controls
