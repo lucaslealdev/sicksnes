@@ -1,7 +1,7 @@
 # sick snes - Automatic Lockout Chip Toggle and In-Game Reset
 ![sick snes logo](images/logo.jpg)
 ## Overview
-sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allows automatic lockout chip toggling and in-game reset functionality. If a cartridge fails the CIC (Check-In Chip) check, the mod disables the CIC and resets the console automatically.
+sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allows automatic lockout chip toggling and in-game reset functionality. If a cartridge fails the CIC (Checking Integrated Chip) check, the mod disables the CIC and resets the console automatically.
 
 ### Features
 - **Automatic lockout chip toggle**
