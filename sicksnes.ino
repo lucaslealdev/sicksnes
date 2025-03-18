@@ -109,8 +109,6 @@ void setup()
     //reset the console to sync with the arduino
     triggerReset();
     //turn on leds
-    pinMode(redPin, OUTPUT);
-    pinMode(greenPin, OUTPUT);
     pinMode(ledPin, OUTPUT);
     updateLED();
     if (debug)
@@ -208,18 +206,22 @@ void updateLED()
 {
     if (digitalRead(cicPin))
     {
-        digitalWrite(redPin, HIGH);
         digitalWrite(greenPin, LOW);
+        pinMode(greenPin, INPUT);
+        pinMode(redPin, OUTPUT);
+        digitalWrite(redPin, HIGH);
     }
     else
     {
         digitalWrite(redPin, LOW);
+        pinMode(redPin, INPUT);
         delay(200);
-        digitalWrite(6, HIGH);
+        pinMode(greenPin, OUTPUT);
+        digitalWrite(greenPin, HIGH);
         delay(200);
-        digitalWrite(6, LOW);
+        digitalWrite(greenPin, LOW);
         delay(200);
-        digitalWrite(6, HIGH);
+        digitalWrite(greenPin, HIGH);
     }
 }
 
