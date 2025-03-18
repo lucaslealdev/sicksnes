@@ -139,6 +139,7 @@ void setup()
         digitalWrite(ledPin, HIGH);
         toggleCIC();
         triggerReset();
+        updateLED();
     }
 }
 
@@ -179,6 +180,7 @@ void loop()
         toggleCIC();
         delay(300);
         triggerReset();
+        updateLED();
     }
 
     delay(300);
@@ -200,7 +202,6 @@ void loop()
 void toggleCIC()
 {
     digitalWrite(cicPin, !digitalRead(cicPin));
-    updateLED();
 }
 
 void updateLED()
@@ -212,8 +213,13 @@ void updateLED()
     }
     else
     {
-        digitalWrite(greenPin, HIGH);
         digitalWrite(redPin, LOW);
+        delay(200);
+        digitalWrite(6, HIGH);
+        delay(200);
+        digitalWrite(6, LOW);
+        delay(200);
+        digitalWrite(6, HIGH);
     }
 }
 
