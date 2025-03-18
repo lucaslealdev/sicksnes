@@ -1,7 +1,7 @@
 # sick snes - Automatic Lockout Chip Toggle and In-Game Reset
 ![sick snes logo](images/logo.jpg)
 ## Overview
-sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allows automatic lockout chip toggling and in-game reset functionality. If a cartridge fails the CIC (Check-In Chip) check, the mod disables the CIC and resets the console automatically.
+sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allows automatic lockout chip toggling and in-game reset functionality. If a cartridge fails the CIC (Checking Integrated Chip) check, the mod disables the CIC and resets the console automatically.
 
 ### Features
 - **Automatic lockout chip toggle**
@@ -44,7 +44,7 @@ Connect the Arduino to the SNES board as follows:
         |  •    •  |
         |          |
         |          |
-        | VIN   D4 |
+        | 5V    D4 |
          ‾‾‾‾‾‾‾‾‾‾
 ```
 
@@ -95,6 +95,22 @@ If the Arduino is flashed via USB (with a bootloader), and *Street Fighter Alpha
 - Hold the **reset button** until the Arduino initializes (~1.8s after power-up). This allows the game to start *after* the Arduino executes its code.
 
 **Note:** This issue is rare and only affects *Street Fighter Alpha 2* on certain SNES consoles.
+
+## Already tested  
+
+| SNES Model         | With bootloader (via usb) | No bootloader (USBasp) |
+|------------------------|--------------------------------|--------------------------------|
+| SNS-CPU-1CHIP-02      | ✅ Full                     | ✅ Full |
+| SNS-CPU-1CHIP-03      | ⚠️ Need SFA2 workaround   | ✅ Full |
+
+### Help Improve Compatibility!  
+
+If you test this mod on a different SNES model, please share your results!  
+Let us know which console you used and whether everything worked as expected.  
+
+This will help improve the compatibility list for future users.  
+
+Thank you for your contribution! 🎮🔥
 
 ---
 
