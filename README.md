@@ -1,26 +1,26 @@
-# sick snes - Automatic Lockout Chip Toggle and In-Game Reset
+# ⛑️ sick snes - Automatic Lockout Chip Toggle and In-Game Reset
 ![sick snes logo](images/logo.jpg)
-## Overview
+## 🗺️ Overview
 sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allows automatic lockout chip toggling and in-game reset functionality. If a cartridge fails the CIC (Checking Integrated Chip) check, the mod disables the CIC and resets the console automatically.
 
-### Features
+### 💎 Features
 - **Automatic lockout chip toggle**
 - **In-game reset functionality** using controller input
 - **Compatibility with all SNES consoles**
 - **LED indicators** for CIC status
 
-### Controls
+### 🕹️ Controls
 - 🔄 **Soft Reset:** Press `L + R + START + LEFT`
 - 🔄 **Long Reset:** Press `L + R + START + DOWN` (Some flashcarts only return to the menu with long reset)
 - 🔒 **Forcefully Disable CIC:** Press `L + R + START + RIGHT`
 
-### Quick demo
+### 🎬 Quick demo
 [https://youtu.be/vH6iCG8fFg8](https://youtu.be/vH6iCG8fFg8)
 
 ---
 
-## Installation Guide
-### Wiring Instructions
+## 📋 Installation Guide
+### 🔌 Wiring Instructions
 Connect the Arduino to the SNES board as follows:
 
 | Arduino Pin | SNES Connection   |
@@ -38,7 +38,14 @@ Connect the Arduino to the SNES board as follows:
 
 **Note:** CIC Pin 4 must be disconnected (lifted) for proper operation.
 
-### Reset Button Wiring (Viewed from PCB Bottom)
+### 💡 The LEDs
+#### 🔴 Stock red LED
+First cut the 5v track for the stock red LED, and connect the positive lead to both D6 and D7. The LED will blink as an indicator when the lock-out chip is disabled.
+#### 🎨 RGB LED
+Connect the positive lead of the red LED to D7 and the positive lead of the green LED (the one that turns on when the lock-out chip is disabled) to D6.
+If you are using LEDs rated for less than 5V, make sure to install appropriate resistors to prevent damage.
+
+### ↻ Reset Button Wiring (Viewed from PCB Bottom)
 ```
          __________
         |  •    •  |
@@ -48,7 +55,7 @@ Connect the Arduino to the SNES board as follows:
          ‾‾‾‾‾‾‾‾‾‾
 ```
 
-### CIC F411X Chip Pinout
+### 𓇲 CIC F411X Chip Wiring
 ```
     9 ______________________________ 1
       | •  •  •  •  •  D8   •  •  D5 |
@@ -63,7 +70,7 @@ Connect the Arduino to the SNES board as follows:
     10 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ 18
 ```
 
-### SNES Controller Pinout (Viewed from PCB Bottom)
+### 🎮 SNES Controller Wiring (Viewed from PCB Bottom)
 ```
     10 _____________________________ 2
       |   A0   A1   A2   •    •    |
@@ -72,38 +79,42 @@ Connect the Arduino to the SNES board as follows:
     11 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ 1
 ```
 
+### 📈 Diagram
+
 ![installation scheme](images/scheme.png)
 ![sample installation](images/example-1.png)
 
 ---
 
-## Programming Instructions
+## 💻 Programming Instructions
 To flash the Arduino with this mod, follow these steps:
 
-### Standard Flashing via USB
+### 💽 Standard Flashing via USB
 1. Connect the Arduino to your computer via USB.
 2. Use the Arduino IDE or a similar tool to upload the firmware.
 3. If using a bootloader, some consoles may require a manual reset workaround for *Street Fighter Alpha 2* (see below).
 
-### Flashing Without Bootloader (For Faster Boot)
+### ⚡ Flashing Without Bootloader (For Faster Boot)
 For some consoles, *Street Fighter Alpha 2* may require a faster startup. To achieve this:
 1. Use an external programmer (e.g., USBasp) to flash the Arduino without a bootloader.
 2. This ensures the Arduino starts before the cartridge, avoiding conflicts.
 
-### Workaround for *Street Fighter Alpha 2* (If Bootloader is Used)
-If the Arduino is flashed via USB (with a bootloader), and *Street Fighter Alpha 2* does not boot properly on your console:
-- Hold the **reset button** until the Arduino initializes (~1.8s after power-up). This allows the game to start *after* the Arduino executes its code.
-
-**Note:** This issue is rare and only affects *Street Fighter Alpha 2* on certain SNES consoles.
-
-## Already tested  
+## 🔗 Compatibility
 
 | SNES Model         | With bootloader (via usb) | No bootloader (USBasp) |
 |------------------------|--------------------------------|--------------------------------|
 | SNS-CPU-1CHIP-02      | ✅ Full                     | ✅ Full |
 | SNS-CPU-1CHIP-03      | ⚠️ Need SFA2 workaround   | ✅ Full |
 
-### Help Improve Compatibility!  
+Every other SNES board should be compatible with this mod, but might need SFA2 workaround when using a bootloader.
+
+### ⚠️ Workaround for *Street Fighter Alpha 2* (only for bootloader usage)
+If the Arduino is flashed via USB (with a bootloader), and *Street Fighter Alpha 2* does not boot properly on your console:
+- Hold the **reset button** until the Arduino initializes (~1.8s after power-up). This allows the game to start *after* the Arduino executes its code.
+
+**Note:** This issue is rare and only affects *Street Fighter Alpha 2* on certain SNES consoles.
+
+### 🙏 Help Improve Compatibility!  
 
 If you test this mod on a different SNES model, please share your results!  
 Let us know which console you used and whether everything worked as expected.  
@@ -114,7 +125,7 @@ Thank you for your contribution! 🎮🔥
 
 ---
 
-## Credits
+## ✨ Credits
 - **Project Creator:** @lucaslealdev 🙋‍♂️
 - **Year:** 2025 📅
 - **Purpose:** Let's mod these games 🎮
