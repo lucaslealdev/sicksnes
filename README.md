@@ -129,6 +129,7 @@ Thank you for your contribution! 🎮🔥
 - **Project Creator:** @lucaslealdev 🙋‍♂️
 - **Year:** 2025 📅
 - **Purpose:** Let's mod these games 🎮
+- **Youtube channel:** [Pixel que Byte](https://www.youtube.com/@PixelqueByte)
 
 This project is provided as-is, with no guarantees. Modify and distribute at your own risk!
 
