@@ -1,4 +1,4 @@
-name: Auto Build & Release HEX
+name: Build and Release HEX
 
 on:
   push:
@@ -10,33 +10,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 📥 Checkout code
         uses: actions/checkout@v3
 
-  - name: 🛠 Install Arduino CLI
-    run: |
-      curl -fsSL https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz | tar xz
-      sudo mv arduino-cli /usr/local/bin/
+      - name: 🛠 Install Arduino CLI
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+          echo "$HOME/.arduino15/bin" >> $GITHUB_PATH
 
-      - name: Install Arduino core for AVR boards
+      - name: 📦 Install Arduino AVR core
         run: |
           arduino-cli core update-index
           arduino-cli core install arduino:avr
 
-      - name: Compile sketch
+      - name: 🔧 Compile sketch
         run: |
-          arduino-cli compile --fqbn arduino:avr:nano ./sicksnes || (echo \"❌ Compilation failed\" && exit 1)
+          arduino-cli compile --fqbn arduino:avr:nano ./sicksnes
 
-      - name: Get HEX output
+      - name: 📁 Prepare HEX artifact
         run: |
           mkdir -p artifacts
           cp ./sicksnes/build/arduino.avr.nano/sicksnes.ino.hex artifacts/sicksnes.hex
 
-      - name: Create or Update Release
+      - name: 🚀 Create or update release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           name: Latest Build
+          body: |
+            🔄 This is an automated build of the latest commit that changed the sketch file.
+            📎 HEX file included for direct flashing to Arduino Nano.
           files: artifacts/sicksnes.hex
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
