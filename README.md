@@ -94,10 +94,31 @@ To flash the Arduino with this mod, follow these steps:
 2. Use the Arduino IDE or a similar tool to upload the firmware.
 3. If using a bootloader, some consoles may require a manual reset workaround for *Street Fighter Alpha 2* (see below).
 
-### ⚡ Flashing Without Bootloader (For Faster Boot)
+### 🧰 Flashing Without Bootloader via USBasp + Extreme Burner
 For some consoles, *Street Fighter Alpha 2* may require a faster startup. To achieve this:
-1. Use an external programmer (e.g., USBasp) to flash the Arduino without a bootloader.
-2. This ensures the Arduino starts before the cartridge, avoiding conflicts.
+
+#### 🧱 1. Install driver with Zadig (one-time setup)
+1. Download and open [Zadig](https://zadig.akeo.ie/).
+2. Plug in your **USBasp programmer**.
+3. In Zadig:
+   - Go to `Options > List All Devices` and enable it.
+   - Select `USBasp` from the dropdown list.
+   - Choose the `libusb-win32` driver (or `libusbK` if needed).
+   - Click `Install Driver`.
+
+> This step allows Extreme Burner to recognize your USBasp programmer properly.
+
+#### 💾 2. Flash the firmware using Extreme Burner - AVR
+1. Open **Extreme Burner - AVR**.
+2. Go to `Settings > Programmer` and select **USBasp**.
+3. Under `Chip`, select **ATmega328P** (or the chip you have).
+4. Go to `File > Open` and load the firmware `.hex` file.
+5. Click the `Write All` button (chip icon with arrow) to start flashing.
+
+> ⚠️ If you see a "signature mismatch" warning, it's safe to ignore it when using an ATmega328PB.
+> The ATmega328PB has a different signature from the 328P, but they are compatible for this purpose.
+> You can enable `Settings > Ignore Signature` to avoid the warning in future sessions.
+
 
 ## 🔗 Compatibility
 
