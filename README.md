@@ -117,7 +117,6 @@ For some consoles, *Street Fighter Alpha 2* may require a faster startup. To ach
 
 > ⚠️ If you see a "signature mismatch" warning, it's safe to ignore it when using an ATmega328PB.
 > The ATmega328PB has a different signature from the 328P, but they are compatible for this purpose.
-> You can enable `Settings > Ignore Signature` to avoid the warning in future sessions.
 
 
 ## 🔗 Compatibility
