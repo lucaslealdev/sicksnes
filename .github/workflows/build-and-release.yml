@@ -15,8 +15,9 @@ jobs:
 
       - name: 🛠 Install Arduino CLI
         run: |
-          curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-          echo "$HOME/.arduino15/bin" >> $GITHUB_PATH
+          curl -fsSL https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz -o arduino-cli.tar.gz
+          tar -xzf arduino-cli.tar.gz
+          sudo mv arduino-cli /usr/local/bin/
 
       - name: 📦 Install Arduino AVR core
         run: |
@@ -38,7 +39,7 @@ jobs:
           tag_name: latest
           name: Latest Build
           body: |
-            🔄 This is an automated build of the latest commit that changed the sketch file.
+            🔄 Automated build from commit: ${{ github.sha }}
             📎 HEX file included for direct flashing to Arduino Nano.
           files: artifacts/sicksnes.hex
         env:
