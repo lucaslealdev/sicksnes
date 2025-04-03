@@ -1,0 +1,42 @@
+name: Auto Build & Release HEX
+
+on:
+  push:
+    paths:
+      - '**.ino'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+  - name: 🛠 Install Arduino CLI
+    run: |
+      curl -fsSL https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz | tar xz
+      sudo mv arduino-cli /usr/local/bin/
+
+      - name: Install Arduino core for AVR boards
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+
+      - name: Compile sketch
+        run: |
+          arduino-cli compile --fqbn arduino:avr:nano ./sicksnes || (echo \"❌ Compilation failed\" && exit 1)
+
+      - name: Get HEX output
+        run: |
+          mkdir -p artifacts
+          cp ./sicksnes/build/arduino.avr.nano/sicksnes.ino.hex artifacts/sicksnes.hex
+
+      - name: Create or Update Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Build
+          files: artifacts/sicksnes.hex
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
