@@ -110,10 +110,9 @@ For some consoles, *Street Fighter Alpha 2* may require a faster startup. To ach
 
 #### 💾 2. Flash the firmware using Extreme Burner - AVR
 1. Open **Extreme Burner - AVR**.
-2. Go to `Settings > Programmer` and select **USBasp**.
-3. Under `Chip`, select **ATmega328P** (or the chip you have).
-4. Go to `File > Open` and load the firmware `.hex` file [found here](https://github.com/lucaslealdev/sicksnes/releases/download/latest/sicksnes.hex).
-5. Click the `Write All` button (chip icon with arrow) to start flashing.
+1. Under `Chip`, select **ATmega328P** (or the chip you have).
+1. Go to `File > Open Flash` and load the firmware `.hex` file [found here](https://github.com/lucaslealdev/sicksnes/releases/download/latest/sicksnes.hex).
+1. Click the `Write All` button (chip icon with arrow) to start flashing.
 
 > ⚠️ If you see a "signature mismatch" warning, it's safe to ignore it when using an ATmega328PB.
 > The ATmega328PB has a different signature from the 328P, but they are compatible for this purpose.
