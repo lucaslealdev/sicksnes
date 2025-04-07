@@ -2,6 +2,8 @@ name: Build and Release HEX
 
 on:
   push:
+    branches:
+      - main
     paths:
       - '**.ino'
 
