@@ -104,6 +104,7 @@ void loop()
         {
             Serial.println("Soft reset");
         }
+        blinkActiveLed();
         triggerReset();
     }
 
@@ -113,6 +114,7 @@ void loop()
         {
             Serial.println("Soft reset");
         }
+        blinkActiveLed();
         triggerLongReset();
     }
 
@@ -270,6 +272,23 @@ void waitForlatchFalling()
     }
     while (latchState() == HIGH)
     {
+    }
+}
+
+void blinkActiveLed()
+{
+    bool isRedPinOutput = DDRD & (1 << PD7);
+    if (isRedPinOutput)
+    {
+        digitalWrite(redPin, LOW);
+        delay(200);
+        digitalWrite(redPin, HIGH);
+    }
+    else
+    {
+        digitalWrite(greenPin, LOW);
+        delay(200);
+        digitalWrite(greenPin, HIGH);
     }
 }
 
