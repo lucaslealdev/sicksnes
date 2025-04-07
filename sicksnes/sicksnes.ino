@@ -72,7 +72,7 @@ void setup()
     pinMode(Sdata, INPUT);
 
     // wait the console to boot
-    delay(1000);
+    delay(2000);
 
     // if the CIC does not pass the check, turn the CIC off
     if (digitalRead(CicGndPin) == HIGH)
