@@ -39,9 +39,9 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: |
-            🔖 Versão: ${{ github.ref_name }}
+            🔖 Version: ${{ github.ref_name }}
             🔄 Commit: ${{ github.sha }}
-            📎 HEX incluso para flash direto no Arduino Nano.
+            📎 HEX included to flash Arduino Nano.
           files: artifacts/sicksnes.hex
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
