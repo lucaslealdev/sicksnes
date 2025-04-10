@@ -35,7 +35,14 @@ jobs:
           mkdir -p artifacts
           cp build/sicksnes.ino.hex artifacts/sicksnes.hex
 
-      - name: 🚀 Create or update release
+      - name: 🧹 Delete existing release (if any)
+        run: |
+          gh release delete latest --yes || true
+          git push --delete origin latest || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🚀 Create new release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
