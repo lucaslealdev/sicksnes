@@ -40,7 +40,7 @@ Connect the Arduino to the SNES board as follows:
 
 ### 💡 The LEDs
 #### 🔴 Stock red LED
-First cut the 5v track for the stock red LED, and connect the positive lead to both D6 and D7. The LED will blink as an indicator when the lock-out chip is disabled.
+Disconnect the 5v pin resistor for the stock red LED, and connect the resistor to both D6 and D7. The LED will blink as an indicator when the lock-out chip is disabled.
 #### 🎨 RGB LED
 Connect the positive lead of the red LED to D7 and the positive lead of the green LED (the one that turns on when the lock-out chip is disabled) to D6.
 If you are using LEDs rated for less than 5V, make sure to install appropriate resistors to prevent damage.
@@ -89,13 +89,13 @@ If you are using LEDs rated for less than 5V, make sure to install appropriate r
 ## 💻 Programming Instructions
 To flash the Arduino with this mod, follow these steps:
 
-### 💽 Standard Flashing via USB
+### 💽 Not recommended: Standard Flashing via USB
 1. Connect the Arduino to your computer via USB.
 2. Use the Arduino IDE or a similar tool to upload the firmware.
-3. If using a bootloader, some consoles may require a manual reset workaround for *Street Fighter Alpha 2* (see below).
+3. If using the default bootloader, some consoles may require a manual reset workaround for *Street Fighter Alpha 2* (see below).
 
-### 🧰 Flashing Without Bootloader via USBasp + Extreme Burner
-For some consoles, *Street Fighter Alpha 2* may require a faster startup. To achieve this:
+### 🧰 Recommended: Flashing via USBasp + Extreme Burner
+Without the bootloader (or with MiniCore bootloader) the arduino startup is faster.
 
 #### 🧱 1. Install driver with Zadig (one-time setup)
 1. Download and open [Zadig](https://zadig.akeo.ie/).
@@ -115,7 +115,7 @@ For some consoles, *Street Fighter Alpha 2* may require a faster startup. To ach
 1. Click the `Write All` button (chip icon with arrow) to start flashing.
 
 > ⚠️ If you see a "signature mismatch" warning, it's safe to ignore it when using an ATmega328PB.
-> The ATmega328PB has a different signature from the 328P, but they are compatible for this purpose.
+> The ATmega328PB has a different signature from the 328P, but they are compatible for this mod.
 
 
 ## 🔗 Compatibility
@@ -128,8 +128,8 @@ For some consoles, *Street Fighter Alpha 2* may require a faster startup. To ach
 
 Every other SNES board should be compatible with this mod, but might need SFA2 workaround when using a bootloader.
 
-### ⚠️ Workaround for *Street Fighter Alpha 2* (only for bootloader usage)
-If the Arduino is flashed via USB (with a bootloader), and *Street Fighter Alpha 2* does not boot properly on your console:
+### ⚠️ Workaround for *Street Fighter Alpha 2* (only for default bootloader usage)
+If the Arduino is flashed via USB (with the default bootloader), *Street Fighter Alpha 2* might not boot properly on your console.
 - Hold the **reset button** until the Arduino initializes (~1.8s after power-up). This allows the game to start *after* the Arduino executes its code.
 
 **Note:** This issue is rare and only affects *Street Fighter Alpha 2* on certain SNES consoles.
