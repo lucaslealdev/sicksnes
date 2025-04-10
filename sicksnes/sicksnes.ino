@@ -54,7 +54,7 @@ void setup()
     pinMode(cicPin, OUTPUT);
     digitalWrite(cicPin, HIGH);
     //reset the console to sync with the arduino
-    triggerReset();
+    triggerMediumReset();
     //turn on leds
     pinMode(ledPin, OUTPUT);
     updateLED();
@@ -72,7 +72,7 @@ void setup()
     pinMode(Sdata, INPUT);
 
     // wait the console to boot
-    delay(2000);
+    delay(1500);
 
     // if the CIC does not pass the check, turn the CIC off
     if (digitalRead(CicGndPin) == HIGH)
@@ -304,6 +304,19 @@ void triggerReset()
     {
         Serial.println("Resetting console");
     }
+}
+
+void triggerMediumReset()
+{
+    if (debug)
+    {
+        Serial.println("Resetting console");
+    }
+    pinMode(resetPin, OUTPUT);
+    digitalWrite(resetPin, HIGH);
+    delay(500);
+    digitalWrite(resetPin, LOW);
+    pinMode(resetPin, INPUT);
 }
 
 void triggerLongReset()
