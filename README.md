@@ -124,6 +124,7 @@ For some consoles, *Street Fighter Alpha 2* may require a faster startup. To ach
 |------------------------|--------------------------------|--------------------------------|
 | SNS-CPU-1CHIP-02      | ✅ Full                     | ✅ Full |
 | SNS-CPU-1CHIP-03      | ⚠️ Need SFA2 workaround   | ✅ Full |
+| SNS-CPU-GPM-02      | not tested   | ✅ Full |
 
 Every other SNES board should be compatible with this mod, but might need SFA2 workaround when using a bootloader.
 
