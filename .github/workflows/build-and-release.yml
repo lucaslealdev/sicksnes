@@ -1,18 +1,16 @@
-name: Build and Release HEX
+name: Manual Versioned Release
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - '**.ino'
+    tags:
+      - 'v*'  # qualquer tag que comece com v (ex: v1.0.0)
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout code
+      - name: 📥 Checkout
         uses: actions/checkout@v3
 
       - name: 🛠 Install Arduino CLI
@@ -35,21 +33,15 @@ jobs:
           mkdir -p artifacts
           cp build/sicksnes.ino.hex artifacts/sicksnes.hex
 
-      - name: 🧹 Delete existing release (if any)
-        run: |
-          gh release delete latest --yes || true
-          git push --delete origin latest || true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 🚀 Create new release
+      - name: 🚀 Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
-          name: Latest Build
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
           body: |
-            🔄 Automated build from commit: ${{ github.sha }}
-            📎 HEX file included for direct flashing to Arduino Nano.
+            🔖 Versão: ${{ github.ref_name }}
+            🔄 Commit: ${{ github.sha }}
+            📎 HEX incluso para flash direto no Arduino Nano.
           files: artifacts/sicksnes.hex
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
