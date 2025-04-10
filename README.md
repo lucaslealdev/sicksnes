@@ -41,6 +41,7 @@ Connect the Arduino to the SNES board as follows:
 ### 💡 The LEDs
 #### 🔴 Stock red LED
 Disconnect the 5v pin resistor for the stock red LED, and connect the resistor to both D6 and D7. The LED will blink as an indicator when the lock-out chip is disabled.
+![how to wire stock rgb led](images/stock-led.png)
 #### 🎨 RGB LED
 Connect the positive lead of the red LED to D7 and the positive lead of the green LED (the one that turns on when the lock-out chip is disabled) to D6.
 If you are using LEDs rated for less than 5V, make sure to install appropriate resistors to prevent damage.
