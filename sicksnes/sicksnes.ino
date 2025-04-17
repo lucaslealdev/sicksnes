@@ -4,7 +4,7 @@
 //  ___ _  ___| | __   ___ ____   ___  ___          //
 // / __| |/ __| |/ /  / __| '_ \ / _ \/ __|         //
 // \__ \ | (__|   <   \__ \ | | |  __/\__ \         //
-// |___/_|\___|_|\_\  \___/_| |_|\___||___/  v1.2.1 //
+// |___/_|\___|_|\_\  \___/_| |_|\___||___/  v1.3.0 //
 //////////////////////////////////////////////////////
 //
 // Made by @lucaslealdev 🙋‍♂️
@@ -17,7 +17,7 @@
 // https://github.com/lucaslealdev/sicksnes
 
 // PINS
-#define debug false
+constexpr bool debug = false;
 #define resetPin 4
 #define CicGndPin 5
 #define greenPin 6
@@ -27,6 +27,9 @@
 #define latch 19 // A0
 #define clock 20 // A1
 #define Sdata 21 // A2
+constexpr uint8_t LATCH_BIT = 0;
+constexpr uint8_t CLOCK_BIT = 1;
+constexpr uint8_t SDATA_BIT = 2;
 
 // Button definitions
 // B, Y, SELECT, START, UP, DOWN, LEFT, RIGHT, A, X, L, R
@@ -74,18 +77,27 @@ void setup()
     // wait the console to boot
     delay(1500);
 
-    // if the CIC does not pass the check, turn the CIC off
-    if (digitalRead(CicGndPin) == HIGH)
-    {
-        if (debug)
-        {
-            Serial.println("Unlocking console");
-        }
+    handleCICUnlockIfNeeded();
+}
+
+void handleCICUnlockIfNeeded() {
+    bool isGameRunning = digitalRead(CicGndPin) == LOW;
+    disableGroundPin();
+
+    if (!isGameRunning) {
+        if (debug) Serial.println("Unlocking console");
+
         digitalWrite(ledPin, HIGH);
         toggleCIC();
         triggerReset();
         updateLED();
     }
+}
+
+void disableGroundPin()
+{
+    pinMode(CicGndPin, INPUT);
+    digitalWrite(CicGndPin, LOW);
 }
 
 void loop()
@@ -98,7 +110,7 @@ void loop()
         buttonsState[i] = dataRead();
     }
 
-    if (isResetComboPressed())
+    if (isComboPressed(resetCombo, sizeof(resetCombo) / sizeof(int)))
     {
         if (debug)
         {
@@ -108,7 +120,7 @@ void loop()
         triggerReset();
     }
 
-    if (isLongResetComboPressed())
+    if (isComboPressed(longResetCombo, sizeof(longResetCombo) / sizeof(int)))
     {
         if (debug)
         {
@@ -118,7 +130,7 @@ void loop()
         triggerLongReset();
     }
 
-    if (isToggleCicComboPressed())
+    if (isComboPressed(toggleCicCombo, sizeof(toggleCicCombo) / sizeof(int)))
     {
         if (debug)
         {
@@ -187,36 +199,9 @@ void updateLED()
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-bool isResetComboPressed()
-{
-    for (int i = 0; i < sizeof(resetCombo) / sizeof(resetCombo[0]); i++)
-    {
-        if (buttonsState[resetCombo[i]] != 0)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool isLongResetComboPressed()
-{
-    for (int i = 0; i < sizeof(longResetCombo) / sizeof(longResetCombo[0]); i++)
-    {
-        if (buttonsState[longResetCombo[i]] != 0)
-        {
-            return false;
-        }
-    }
-    return true;
-}
-
-bool isToggleCicComboPressed()
-{
-    for (int i = 0; i < sizeof(toggleCicCombo) / sizeof(toggleCicCombo[0]); i++)
-    {
-        if (buttonsState[toggleCicCombo[i]] != 0)
-        {
+bool isComboPressed(const int combo[], size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        if (buttonsState[combo[i]] != 0) {
             return false;
         }
     }
@@ -225,7 +210,7 @@ bool isToggleCicComboPressed()
 
 int latchState()
 {
-    int state = (PINC & (1 << (0))); // A0
+    int state = (PINC & (1 << LATCH_BIT)); // A0
     if (state)
     {
         return HIGH;
@@ -238,7 +223,7 @@ int latchState()
 
 int clockState()
 {
-    int state = (PINC & (1 << (1))); // A1
+    int state = (PINC & (1 << CLOCK_BIT)); // A1
     if (state)
     {
         return HIGH;
@@ -251,8 +236,8 @@ int clockState()
 
 int dataRead()
 {
-    int data = (PINC & (1 << (2))); // A2
-    return data;
+    int state = (PINC & (1 << SDATA_BIT)); // A2
+    return state;
 }
 
 void waitForclockFalling()
@@ -275,10 +260,13 @@ void waitForlatchFalling()
     }
 }
 
+bool isRedLEDActive() {
+    return DDRD & (1 << PD7);
+}
+
 void blinkActiveLed()
 {
-    bool isRedPinOutput = DDRD & (1 << PD7);
-    if (isRedPinOutput)
+    if (isRedLEDActive())
     {
         digitalWrite(redPin, LOW);
         delay(200);
