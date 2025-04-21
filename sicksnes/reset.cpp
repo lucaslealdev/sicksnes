@@ -1,4 +1,3 @@
-// reset.cpp
 #include <Arduino.h>
 #include "reset.h"
 
@@ -6,17 +5,17 @@
 extern bool debug;
 
 void triggerReset() {
+    if (debug) Serial.println("Quick resetting console");
     pinMode(resetPin, OUTPUT);
     digitalWrite(resetPin, HIGH);
     delay(100);
     digitalWrite(resetPin, LOW);
     delay(100);
     pinMode(resetPin, INPUT);
-    if (debug) Serial.println("Resetting console");
 }
 
 void triggerMediumReset() {
-    if (debug) Serial.println("Resetting console");
+    if (debug) Serial.println("Medium resetting console");
     pinMode(resetPin, OUTPUT);
     digitalWrite(resetPin, HIGH);
     delay(500);
@@ -25,7 +24,7 @@ void triggerMediumReset() {
 }
 
 void triggerLongReset() {
-    if (debug) Serial.println("Resetting console");
+    if (debug) Serial.println("Long resetting console");
     pinMode(resetPin, OUTPUT);
     digitalWrite(resetPin, HIGH);
     delay(2000);
