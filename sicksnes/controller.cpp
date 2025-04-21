@@ -22,6 +22,27 @@ bool isComboPressed(const int combo[], size_t size) {
     return true;
 }
 
+int getPressedCombo(int* outCombo, int maxSize) {
+    int count = 0;
+    for (int i = 0; i < 12 && count < maxSize; i++) {
+        if (buttonsState[i] == 0) {
+            outCombo[count] = i;
+            count++;
+        }
+    }
+    return count;
+}
+
+bool isAnyComboPressed() {
+    int pressed = 0;
+    for (int i = 0; i < 12; i++) {
+        if (buttonsState[i] == 0) {
+            pressed++;
+        }
+    }
+    return pressed == 4;
+}
+
 int latchState() {
     int state = (PINC & (1 << LATCH_BIT));
     return state ? HIGH : LOW;

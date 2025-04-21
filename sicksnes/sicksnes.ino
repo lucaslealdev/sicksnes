@@ -24,6 +24,8 @@ constexpr uint8_t CLOCK_BIT = 1;
 constexpr uint8_t SDATA_BIT = 2;
 
 bool alreadyCheckedFactoryReset = false;
+bool alreadyCheckedConfiguration = false;
+int status = 0;
 
 void setup() {
     if (debug) Serial.begin(9600);
@@ -49,6 +51,39 @@ void loop() {
     waitForlatchFalling();
     loadInput();
 
+    if (!alreadyCheckedConfiguration) {
+        const int configurationCombo[] = {buttonStart};
+        if (isComboPressed(configurationCombo, 1)) {
+            if (debug) Serial.println("Configurating buttons");
+            status = 1;
+        }
+        alreadyCheckedConfiguration = true;
+    }
+
+    switch (status) {
+        case 1:
+            blinkActiveLed();
+            if (isAnyComboPressed()) {
+                if (debug) Serial.println("Combo pressed...");
+                int pressedCombo[12];
+                int size = getPressedCombo(pressedCombo, sizeof(pressedCombo) / sizeof(pressedCombo[0]));
+                if (debug) Serial.print("Pressed combo: ");
+                for (int i = 0; i < size; i++) {
+                    if (debug) Serial.print(pressedCombo[i]);
+                    if (i < size - 1 && debug) Serial.print(", ");
+                }
+                if (debug) Serial.println();
+                saveNewResetCombo(pressedCombo, size);
+                status = 2;
+            }
+            delay(300);
+            return;
+        case 2:
+            status = 0;
+            delay(300);
+            return;
+    }
+
     if (!alreadyCheckedFactoryReset) {
         const int factoryResetCombo[] = {buttonSelect};
         if (isComboPressed(factoryResetCombo, 1)) {
@@ -65,7 +100,7 @@ void loop() {
     }
 
     if (isComboPressed(combos.longResetCombo, sizeof(combos.longResetCombo) / sizeof(int))) {
-        if (debug) Serial.println("Soft reset longo");
+        if (debug) Serial.println("Long soft reset");
         blinkActiveLed();
         triggerLongReset();
     }
