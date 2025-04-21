@@ -16,6 +16,8 @@
 // this mod turns the CIC off and reset the console automatically.
 // https://github.com/lucaslealdev/sicksnes
 
+#include <EEPROM.h>
+
 // PINS
 constexpr bool debug = false;
 #define resetPin 4
@@ -45,9 +47,32 @@ constexpr uint8_t SDATA_BIT = 2;
 #define buttonX 9
 #define buttonL 10
 #define buttonR 11
-const int resetCombo[] = {buttonStart, buttonL, buttonR, buttonLeft};
-const int longResetCombo[] = {buttonStart, buttonL, buttonR, buttonDown};
-const int toggleCicCombo[] = {buttonStart, buttonL, buttonR, buttonRight};
+
+struct ButtonCombos {
+    int resetCombo[4];
+    int longResetCombo[4];
+    bool initialized;
+};
+
+const int EEPROM_ADDR = 0;
+ButtonCombos combos;
+
+void saveDefaultCombos() {
+    combos = {
+        {buttonStart, buttonL, buttonR, buttonLeft},
+        {buttonStart, buttonL, buttonR, buttonDown},
+        true
+    };
+    EEPROM.put(EEPROM_ADDR, combos);
+    if (debug) Serial.println("Reset de fábrica realizado!");
+}
+
+void loadCombos() {
+    EEPROM.get(EEPROM_ADDR, combos);
+    if (!combos.initialized) {
+        saveDefaultCombos();
+    }
+}
 
 int buttonsState[12];
 
@@ -78,6 +103,8 @@ void setup()
     delay(1500);
 
     handleCICUnlockIfNeeded();
+
+    loadCombos();
 }
 
 void handleCICUnlockIfNeeded() {
@@ -100,6 +127,7 @@ void disableGroundPin()
     digitalWrite(CicGndPin, LOW);
 }
 
+bool alreadyCheckedFactoryReset = false;
 void loop()
 {
     waitForlatchFalling();
@@ -110,7 +138,16 @@ void loop()
         buttonsState[i] = dataRead();
     }
 
-    if (isComboPressed(resetCombo, sizeof(resetCombo) / sizeof(int)))
+    if (!alreadyCheckedFactoryReset) {
+        const int factoryResetCombo[] = {buttonSelect};
+        if (isComboPressed(factoryResetCombo, 1)) {
+            if (debug) Serial.println("Reset de fábrica solicitado (SELECT pressionado)...");
+            saveDefaultCombos();
+        }
+        alreadyCheckedFactoryReset = true;
+    }
+
+    if (isComboPressed(combos.resetCombo, sizeof(combos.resetCombo) / sizeof(int)))
     {
         if (debug)
         {
@@ -120,7 +157,7 @@ void loop()
         triggerReset();
     }
 
-    if (isComboPressed(longResetCombo, sizeof(longResetCombo) / sizeof(int)))
+    if (isComboPressed(combos.longResetCombo, sizeof(combos.longResetCombo) / sizeof(int)))
     {
         if (debug)
         {
@@ -128,18 +165,6 @@ void loop()
         }
         blinkActiveLed();
         triggerLongReset();
-    }
-
-    if (isComboPressed(toggleCicCombo, sizeof(toggleCicCombo) / sizeof(int)))
-    {
-        if (debug)
-        {
-            Serial.println("Toggle CIC");
-        }
-        toggleCIC();
-        delay(300);
-        triggerReset();
-        updateLED();
     }
 
     delay(300);
