@@ -7,7 +7,7 @@
 #include "led.h"
 #include "controller.h"
 
-bool debug = true;
+bool debug = false;
 
 // Pinos
 #define resetPin 4
