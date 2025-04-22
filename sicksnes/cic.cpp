@@ -1,4 +1,3 @@
-// cic.cpp
 #include <Arduino.h>
 #include "cic.h"
 
@@ -15,12 +14,16 @@ void disableGroundPin() {
     digitalWrite(CicGndPin, LOW);
 }
 
+bool isCicOn() {
+    return digitalRead(cicPin) == HIGH;
+}
+
 void toggleCIC() {
     digitalWrite(cicPin, !digitalRead(cicPin));
 }
 
-void updateLED(); // declarada em led.h
-void triggerReset(); // declarada em reset.h
+void updateLED();
+void triggerReset();
 
 void handleCICUnlockIfNeeded() {
     bool isGameRunning = digitalRead(CicGndPin) == LOW;

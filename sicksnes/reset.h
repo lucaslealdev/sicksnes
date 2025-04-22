@@ -1,4 +1,3 @@
-// reset.h
 #ifndef RESET_H
 #define RESET_H
 

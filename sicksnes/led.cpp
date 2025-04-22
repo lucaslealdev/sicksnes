@@ -1,9 +1,25 @@
-// led.cpp
 #include <Arduino.h>
 #include "led.h"
+#include "cic.h"
 
 #define greenPin 6
 #define redPin 7
+
+void greenLedOn() {
+    digitalWrite(redPin, LOW);
+    pinMode(redPin, INPUT);
+    delay(200);
+    pinMode(greenPin, OUTPUT);
+    digitalWrite(greenPin, HIGH);
+}
+
+void redLedOn() {
+    digitalWrite(greenPin, LOW);
+    pinMode(greenPin, INPUT);
+    delay(200);
+    pinMode(redPin, OUTPUT);
+    digitalWrite(redPin, HIGH);
+}
 
 bool isRedLEDActive() {
     return DDRD & (1 << PD7);
@@ -22,20 +38,12 @@ void blinkActiveLed() {
 }
 
 void updateLED() {
-    if (digitalRead(8)) {
-        digitalWrite(greenPin, LOW);
-        pinMode(greenPin, INPUT);
-        pinMode(redPin, OUTPUT);
-        digitalWrite(redPin, HIGH);
+    if (isCicOn()) {
+        redLedOn();
     } else {
-        digitalWrite(redPin, LOW);
-        pinMode(redPin, INPUT);
-        delay(200);
-        pinMode(greenPin, OUTPUT);
-        digitalWrite(greenPin, HIGH);
-        delay(200);
-        digitalWrite(greenPin, LOW);
-        delay(200);
-        digitalWrite(greenPin, HIGH);
+        greenLedOn();
+        blinkActiveLed();
+        blinkActiveLed();
+        blinkActiveLed();
     }
 }

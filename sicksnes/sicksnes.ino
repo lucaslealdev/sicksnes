@@ -1,4 +1,3 @@
-// Arquivo: sketch.ino (arquivo principal)
 #include <Arduino.h>
 #include <EEPROM.h>
 
@@ -53,7 +52,7 @@ void loop() {
     if (!alreadyCheckedFactoryReset) {
         const int factoryResetCombo[] = {buttonSelect};
         if (isComboPressed(factoryResetCombo, 1)) {
-            if (debug) Serial.println("Reset de fábrica solicitado (SELECT pressionado)...");
+            if (debug) Serial.println("Factory reset (SELECT)...");
             saveDefaultCombos();
         }
         alreadyCheckedFactoryReset = true;

@@ -1,4 +1,3 @@
-// combo.cpp
 #include "combo.h"
 
 const int EEPROM_ADDR = 0;

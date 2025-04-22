@@ -1,4 +1,3 @@
-// controller.cpp
 #include "controller.h"
 
 #define LATCH_BIT 0

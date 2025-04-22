@@ -1,4 +1,3 @@
-// combo.h
 #ifndef COMBO_H
 #define COMBO_H
 
