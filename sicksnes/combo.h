@@ -28,5 +28,6 @@ extern ButtonCombos combos;
 
 void saveDefaultCombos();
 void loadCombos();
+void saveNewResetCombo(int* newCombo, size_t size);
 
 #endif

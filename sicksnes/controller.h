@@ -13,5 +13,7 @@ int clockState();
 int dataRead();
 void waitForclockFalling();
 void waitForlatchFalling();
+int getPressedCombo(int* outCombo, int maxSize);
+bool isAnyComboPressed();
 
 #endif

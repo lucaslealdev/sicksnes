@@ -28,12 +28,14 @@ bool isRedLEDActive() {
 void blinkActiveLed() {
     if (isRedLEDActive()) {
         digitalWrite(redPin, LOW);
-        delay(200);
+        delay(300);
         digitalWrite(redPin, HIGH);
+        delay(300);
     } else {
         digitalWrite(greenPin, LOW);
-        delay(200);
+        delay(300);
         digitalWrite(greenPin, HIGH);
+        delay(300);
     }
 }
 
