@@ -64,7 +64,7 @@ void loop() {
         case 1:
             blinkActiveLed();
             if (isAnyComboPressed()) {
-                if (debug) Serial.println("Combo pressed...");
+                if (debug) Serial.println("Reset combo selected...");
                 int pressedCombo[12];
                 int size = getPressedCombo(pressedCombo, sizeof(pressedCombo) / sizeof(pressedCombo[0]));
                 if (debug) Serial.print("Pressed combo: ");
@@ -75,11 +75,26 @@ void loop() {
                 if (debug) Serial.println();
                 saveNewResetCombo(pressedCombo, size);
                 status = 2;
+                delay(1000);
             }
             delay(300);
             return;
         case 2:
-            status = 0;
+            blinkActiveLed();
+            if (isAnyComboPressed()) {
+                if (debug) Serial.println("Long reset combo selected...");
+                int pressedCombo[12];
+                int size = getPressedCombo(pressedCombo, sizeof(pressedCombo) / sizeof(pressedCombo[0]));
+                if (debug) Serial.print("Pressed combo: ");
+                for (int i = 0; i < size; i++) {
+                    if (debug) Serial.print(pressedCombo[i]);
+                    if (i < size - 1 && debug) Serial.print(", ");
+                }
+                if (debug) Serial.println();
+                saveNewLongResetCombo(pressedCombo, size);
+                status = 0;
+                delay(1000);
+            }
             delay(300);
             return;
     }
@@ -97,9 +112,7 @@ void loop() {
         if (debug) Serial.println("Soft reset");
         blinkActiveLed();
         triggerReset();
-    }
-
-    if (isComboPressed(combos.longResetCombo, sizeof(combos.longResetCombo) / sizeof(int))) {
+    } else if (isComboPressed(combos.longResetCombo, sizeof(combos.longResetCombo) / sizeof(int))) {
         if (debug) Serial.println("Long soft reset");
         blinkActiveLed();
         triggerLongReset();

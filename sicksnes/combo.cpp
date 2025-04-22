@@ -17,7 +17,7 @@ void saveDefaultCombos() {
 }
 
 void saveNewResetCombo(int* newCombo, size_t size) {
-    if (size > 4) {
+    if (size != 4) {
         return;
     }
     for (size_t i = 0; i < size; i++) {
@@ -36,9 +36,29 @@ void saveNewResetCombo(int* newCombo, size_t size) {
     }
 }
 
+void saveNewLongResetCombo(int* newCombo, size_t size) {
+    if (size != 4) {
+        return;
+    }
+    for (size_t i = 0; i < size; i++) {
+        combos.longResetCombo[i] = newCombo[i];
+    }
+    EEPROM.put(EEPROM_ADDR, combos);
+    if (debug) {
+        Serial.print("New long reset combo saved: ");
+        for (size_t i = 0; i < size; i++) {
+            Serial.print(combos.longResetCombo[i]);
+            if (i < size - 1) {
+                Serial.print(", ");
+            }
+        }
+        Serial.println();
+    }
+}
+
 void loadCombos() {
     EEPROM.get(EEPROM_ADDR, combos);
-    if (!combos.initialized) {
+    if (combos.resetCombo[0] == -1 || !combos.initialized) {
         saveDefaultCombos();
     }
     if (debug) {
