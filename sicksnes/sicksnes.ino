@@ -1,3 +1,21 @@
+//////////////////////////////////////////////////////
+//      _      _                                    //
+//     (_)    | |                                   //
+//  ___ _  ___| | __   ___ ____   ___  ___          //
+// / __| |/ __| |/ /  / __| '_ \ / _ \/ __|         //
+// \__ \ | (__|   <   \__ \ | | |  __/\__ \         //
+// |___/_|\___|_|\_\  \___/_| |_|\___||___/  v1.4.0 //
+//////////////////////////////////////////////////////
+//
+// Made by @lucaslealdev 🙋‍♂️
+// 2025 📅
+// let's mod these games 🎮
+//
+// The _sick snes_ allows automatic lockout chip toggle and in-game reset.
+// If the cart does not pass the CIC check,
+// this mod turns the CIC off and reset the console automatically.
+// https://github.com/lucaslealdev/sicksnes
+
 #include <Arduino.h>
 #include <EEPROM.h>
 
