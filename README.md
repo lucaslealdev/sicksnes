@@ -9,13 +9,21 @@ sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allow
 - **Compatibility with all SNES consoles**
 - **LED indicators** for CIC status
 
+### 🎬 Overview video
+[https://youtu.be/vH6iCG8fFg8](https://youtu.be/vH6iCG8fFg8)
+
 ### 🕹️ Controls
 - 🔄 **Soft Reset:** Press `L + R + START + LEFT`
 - 🔄 **Long Reset:** Press `L + R + START + DOWN` (Some flashcarts only return to the menu with long reset)
-- 🔒 **Forcefully Disable CIC:** Press `L + R + START + RIGHT`
 
-### 🎬 Quick demo
-[https://youtu.be/vH6iCG8fFg8](https://youtu.be/vH6iCG8fFg8)
+#### Changing default in-game-reset shortcuts
+1. Power on the console while holding start and it will start the configuration mode.
+1. While the led blinks, press a 4 button combo to select the quick reset combo.
+1. When the led starts blinking again, press a 4 button combo to select the long reset combo.
+
+[Shortcut demo video](https://youtu.be/DvA6ozuwWZA)
+
+*To reset to default IGR shortcuts hold select and power the console.
 
 ---
 
@@ -117,7 +125,6 @@ Without the bootloader (or with MiniCore bootloader) the arduino startup is fast
 
 > ⚠️ If you see a "signature mismatch" warning, it's safe to ignore it when using an ATmega328PB.
 > The ATmega328PB has a different signature from the 328P, but they are compatible for this mod.
-
 
 ## 🔗 Compatibility
 
