@@ -1,3 +1,19 @@
+Disclaimer:
+
+Anyone contributing to this mod is in no way responsible to whatever happens to your console after installing or removing it.
+
+
+You do this at your own risk.
+
+
+If you don't know what you're doing, go to someone that does.
+
+
+
+Do NOT reset whilst you're saving data. If you do, you'll most likely corrupt your game save and/or cartridge.
+You have been warned.
+
+
 # ⛑️ sick snes - Automatic Lockout Chip Toggle and In-Game Reset
 ![sick snes logo](images/logo.jpg)
 ## 🗺️ Overview
@@ -157,6 +173,7 @@ Thank you for your contribution! 🎮🔥
 - **Project Creator:** @lucaslealdev 🙋‍♂️
 - **Year:** 2025 📅
 - **Purpose:** Let's mod these games 🎮
+- The disclaimer took from [here](https://github.com/pyroesp/PlayStation-1-Reset-Mod)
 - **Youtube channel:** [Pixel que Byte](https://www.youtube.com/@PixelqueByte)
 
 This project is provided as-is, with no guarantees. Modify and distribute at your own risk!
