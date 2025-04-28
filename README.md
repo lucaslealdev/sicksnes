@@ -175,6 +175,7 @@ Thank you for your contribution! 🎮🔥
 - **Purpose:** Let's mod these games 🎮
 - The disclaimer took from [here](https://github.com/pyroesp/PlayStation-1-Reset-Mod)
 - **Youtube channel:** [Pixel que Byte](https://www.youtube.com/@PixelqueByte)
+- Got the reset idea for this code from [JeffWDH/NES-In-Game-Reset](https://github.com/JeffWDH/NES-In-Game-Reset)
 
 This project is provided as-is, with no guarantees. Modify and distribute at your own risk!
 
