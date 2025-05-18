@@ -1,3 +1,19 @@
+Disclaimer:
+
+Anyone contributing to this mod is in no way responsible to whatever happens to your console after installing or removing it.
+
+
+You do this at your own risk.
+
+
+If you don't know what you're doing, go to someone that does.
+
+
+
+Do NOT reset whilst you're saving data. If you do, you'll most likely corrupt your game save and/or cartridge.
+You have been warned.
+
+
 # ⛑️ sick snes - Automatic Lockout Chip Toggle and In-Game Reset
 ![sick snes logo](images/logo.jpg)
 ## 🗺️ Overview
@@ -9,13 +25,21 @@ sick snes is a mod for the Super Nintendo Entertainment System (SNES) that allow
 - **Compatibility with all SNES consoles**
 - **LED indicators** for CIC status
 
+### 🎬 Overview video
+[https://youtu.be/vH6iCG8fFg8](https://youtu.be/vH6iCG8fFg8)
+
 ### 🕹️ Controls
 - 🔄 **Soft Reset:** Press `L + R + START + LEFT`
 - 🔄 **Long Reset:** Press `L + R + START + DOWN` (Some flashcarts only return to the menu with long reset)
-- 🔒 **Forcefully Disable CIC:** Press `L + R + START + RIGHT`
 
-### 🎬 Quick demo
-[https://youtu.be/vH6iCG8fFg8](https://youtu.be/vH6iCG8fFg8)
+#### Changing default in-game-reset shortcuts
+1. Power on the console while holding start and it will start the configuration mode.
+1. While the led blinks, press a 4 button combo to select the quick reset combo.
+1. When the led starts blinking again, press a 4 button combo to select the long reset combo.
+
+[Shortcut demo video](https://youtu.be/DvA6ozuwWZA)
+
+*To reset to default IGR shortcuts hold select and power the console.
 
 ---
 
@@ -41,6 +65,7 @@ Connect the Arduino to the SNES board as follows:
 ### 💡 The LEDs
 #### 🔴 Stock red LED
 Disconnect the 5v pin resistor for the stock red LED, and connect the resistor to both D6 and D7. The LED will blink as an indicator when the lock-out chip is disabled.
+
 ![how to wire stock rgb led](images/stock-led.png)
 #### 🎨 RGB LED
 Connect the positive lead of the red LED to D7 and the positive lead of the green LED (the one that turns on when the lock-out chip is disabled) to D6.
@@ -118,7 +143,6 @@ Without the bootloader (or with MiniCore bootloader) the arduino startup is fast
 > ⚠️ If you see a "signature mismatch" warning, it's safe to ignore it when using an ATmega328PB.
 > The ATmega328PB has a different signature from the 328P, but they are compatible for this mod.
 
-
 ## 🔗 Compatibility
 
 | SNES Model         | With bootloader (via usb) | No bootloader (USBasp) |
@@ -150,7 +174,9 @@ Thank you for your contribution! 🎮🔥
 - **Project Creator:** @lucaslealdev 🙋‍♂️
 - **Year:** 2025 📅
 - **Purpose:** Let's mod these games 🎮
+- The disclaimer took from [here](https://github.com/pyroesp/PlayStation-1-Reset-Mod)
 - **Youtube channel:** [Pixel que Byte](https://www.youtube.com/@PixelqueByte)
+- Got the reset idea for this code from [JeffWDH/NES-In-Game-Reset](https://github.com/JeffWDH/NES-In-Game-Reset)
 
 This project is provided as-is, with no guarantees. Modify and distribute at your own risk!
 
