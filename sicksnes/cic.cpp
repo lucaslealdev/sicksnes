@@ -6,6 +6,8 @@
 #define ledPin 13
 #define greenPin 6
 #define redPin 7
+#define greenGNDPin 9
+#define redGNDPin 10
 
 extern bool debug;
 

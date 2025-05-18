@@ -32,6 +32,8 @@ bool debug = false;
 #define CicGndPin 5
 #define greenPin 6
 #define redPin 7
+#define greenGNDPin 9
+#define redGNDPin 10
 #define cicPin 8
 #define ledPin 13
 #define latch 19 // A0
