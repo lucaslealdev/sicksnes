@@ -150,6 +150,7 @@ Without the bootloader (or with MiniCore bootloader) the arduino startup is fast
 | SNS-CPU-1CHIP-02      | ✅ Full                     | ✅ Full |
 | SNS-CPU-1CHIP-03      | ⚠️ Need SFA2 workaround   | ✅ Full |
 | SNS-CPU-GPM-02      | not tested   | ✅ Full |
+| SNN-CPU-01 (baby jr)      | not tested   | ✅ Full |
 
 Every other SNES board should be compatible with this mod, but might need SFA2 workaround when using a bootloader.
 
