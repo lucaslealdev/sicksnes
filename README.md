@@ -108,7 +108,10 @@ If you are using LEDs rated for less than 5V, make sure to install appropriate r
 ### 📈 Diagram
 
 ![installation scheme](images/scheme.png)
+#### Sample installations
 ![sample installation](images/example-1.png)
+![snes-jr-1](images/snesjr-1.jpg)
+![snes-jr-2](images/snesjr-2.jpg)
 
 ---
 
