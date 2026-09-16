@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <EEPROM.h>
+#include "pins.h"
 
 #define buttonB 0
 #define buttonY 1
@@ -18,8 +19,8 @@
 #define buttonR 11
 
 struct ButtonCombos {
-    int resetCombo[4];
-    int longResetCombo[4];
+    int resetCombo[COMBO_SIZE];
+    int longResetCombo[COMBO_SIZE];
     bool initialized;
 };
 
@@ -30,5 +31,6 @@ void saveDefaultCombos();
 void loadCombos();
 void saveNewResetCombo(int* newCombo, size_t size);
 void saveNewLongResetCombo(int* newCombo, size_t size);
+void printCombo(const int* combo, size_t size);
 
 #endif

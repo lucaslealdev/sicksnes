@@ -2,8 +2,9 @@
 #define CONTROLLER_H
 
 #include <Arduino.h>
+#include "pins.h"
 
-extern int buttonsState[12];
+extern int buttonsState[NUM_BUTTONS];
 
 void loadInput();
 bool isComboPressed(const int combo[], size_t size);

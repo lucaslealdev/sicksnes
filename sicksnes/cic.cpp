@@ -1,13 +1,8 @@
 #include <Arduino.h>
 #include "cic.h"
-
-#define CicGndPin 5
-#define cicPin 8
-#define ledPin 13
-#define greenPin 6
-#define redPin 7
-#define greenGNDPin 9
-#define redGNDPin 10
+#include "pins.h"
+#include "led.h"
+#include "reset.h"
 
 extern bool debug;
 
@@ -23,9 +18,6 @@ bool isCicOn() {
 void toggleCIC() {
     digitalWrite(cicPin, !digitalRead(cicPin));
 }
-
-void updateLED();
-void triggerReset();
 
 void handleCICUnlockIfNeeded() {
     bool isGameRunning = digitalRead(CicGndPin) == LOW;

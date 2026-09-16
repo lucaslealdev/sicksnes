@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "reset.h"
+#include "pins.h"
 
-#define resetPin 4
 extern bool debug;
 
 void triggerReset() {

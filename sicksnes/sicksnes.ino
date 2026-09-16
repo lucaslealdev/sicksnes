@@ -19,6 +19,7 @@
 #include <Arduino.h>
 #include <EEPROM.h>
 
+#include "pins.h"
 #include "combo.h"
 #include "cic.h"
 #include "reset.h"
@@ -26,22 +27,6 @@
 #include "controller.h"
 
 bool debug = false;
-
-// Pinos
-#define resetPin 4
-#define CicGndPin 5
-#define greenPin 6
-#define redPin 7
-#define greenGNDPin 9
-#define redGNDPin 10
-#define cicPin 8
-#define ledPin 13
-#define latch 19 // A0
-#define clock 20 // A1
-#define Sdata 21 // A2
-constexpr uint8_t LATCH_BIT = 0;
-constexpr uint8_t CLOCK_BIT = 1;
-constexpr uint8_t SDATA_BIT = 2;
 
 bool alreadyCheckedFactoryReset = false;
 bool alreadyCheckedConfiguration = false;
@@ -67,6 +52,24 @@ void setup() {
     loadCombos();
 }
 
+static void handleComboConfiguration(void (*saveCombo)(int*, size_t), const char* selectedLabel, int nextStatus) {
+    blinkActiveLed();
+    if (isAnyComboPressed()) {
+        if (debug) Serial.println(selectedLabel);
+        int pressedCombo[NUM_BUTTONS];
+        int size = getPressedCombo(pressedCombo, sizeof(pressedCombo) / sizeof(pressedCombo[0]));
+        if (debug) {
+            Serial.print("Pressed combo: ");
+            printCombo(pressedCombo, size);
+            Serial.println();
+        }
+        saveCombo(pressedCombo, size);
+        status = nextStatus;
+        delay(1000);
+    }
+    delay(300);
+}
+
 void loop() {
     waitForlatchFalling();
     loadInput();
@@ -82,40 +85,10 @@ void loop() {
 
     switch (status) {
         case 1:
-            blinkActiveLed();
-            if (isAnyComboPressed()) {
-                if (debug) Serial.println("Reset combo selected...");
-                int pressedCombo[12];
-                int size = getPressedCombo(pressedCombo, sizeof(pressedCombo) / sizeof(pressedCombo[0]));
-                if (debug) Serial.print("Pressed combo: ");
-                for (int i = 0; i < size; i++) {
-                    if (debug) Serial.print(pressedCombo[i]);
-                    if (i < size - 1 && debug) Serial.print(", ");
-                }
-                if (debug) Serial.println();
-                saveNewResetCombo(pressedCombo, size);
-                status = 2;
-                delay(1000);
-            }
-            delay(300);
+            handleComboConfiguration(saveNewResetCombo, "Reset combo selected...", 2);
             return;
         case 2:
-            blinkActiveLed();
-            if (isAnyComboPressed()) {
-                if (debug) Serial.println("Long reset combo selected...");
-                int pressedCombo[12];
-                int size = getPressedCombo(pressedCombo, sizeof(pressedCombo) / sizeof(pressedCombo[0]));
-                if (debug) Serial.print("Pressed combo: ");
-                for (int i = 0; i < size; i++) {
-                    if (debug) Serial.print(pressedCombo[i]);
-                    if (i < size - 1 && debug) Serial.print(", ");
-                }
-                if (debug) Serial.println();
-                saveNewLongResetCombo(pressedCombo, size);
-                status = 0;
-                delay(1000);
-            }
-            delay(300);
+            handleComboConfiguration(saveNewLongResetCombo, "Long reset combo selected...", 0);
             return;
     }
 
