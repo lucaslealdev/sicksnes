@@ -1,11 +1,7 @@
 #include <Arduino.h>
 #include "led.h"
 #include "cic.h"
-
-#define greenPin 6
-#define redPin 7
-#define greenGNDPin 9
-#define redGNDPin 10
+#include "pins.h"
 
 void greenLedOn() {
     digitalWrite(redPin, LOW);

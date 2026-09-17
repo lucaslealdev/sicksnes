@@ -1,13 +1,10 @@
 #include "controller.h"
+#include "pins.h"
 
-#define LATCH_BIT 0
-#define CLOCK_BIT 1
-#define SDATA_BIT 2
-
-int buttonsState[12];
+int buttonsState[NUM_BUTTONS];
 
 void loadInput() {
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < NUM_BUTTONS; i++) {
         waitForclockFalling();
         buttonsState[i] = dataRead();
     }
@@ -24,7 +21,7 @@ bool isComboPressed(const int combo[], size_t size) {
 
 int getPressedCombo(int* outCombo, int maxSize) {
     int count = 0;
-    for (int i = 0; i < 12 && count < maxSize; i++) {
+    for (int i = 0; i < NUM_BUTTONS && count < maxSize; i++) {
         if (buttonsState[i] == 0) {
             outCombo[count] = i;
             count++;
@@ -35,12 +32,12 @@ int getPressedCombo(int* outCombo, int maxSize) {
 
 bool isAnyComboPressed() {
     int pressed = 0;
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < NUM_BUTTONS; i++) {
         if (buttonsState[i] == 0) {
             pressed++;
         }
     }
-    return pressed == 4;
+    return pressed == COMBO_SIZE;
 }
 
 int latchState() {

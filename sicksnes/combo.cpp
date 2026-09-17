@@ -4,6 +4,15 @@ const int EEPROM_ADDR = 0;
 extern bool debug;
 ButtonCombos combos;
 
+void printCombo(const int* combo, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        Serial.print(combo[i]);
+        if (i < size - 1) {
+            Serial.print(", ");
+        }
+    }
+}
+
 void saveDefaultCombos() {
     combos = {
         {buttonStart, buttonL, buttonR, buttonLeft},
@@ -17,7 +26,7 @@ void saveDefaultCombos() {
 }
 
 void saveNewResetCombo(int* newCombo, size_t size) {
-    if (size != 4) {
+    if (size != COMBO_SIZE) {
         return;
     }
     for (size_t i = 0; i < size; i++) {
@@ -26,18 +35,13 @@ void saveNewResetCombo(int* newCombo, size_t size) {
     EEPROM.put(EEPROM_ADDR, combos);
     if (debug) {
         Serial.print("New reset combo saved: ");
-        for (size_t i = 0; i < size; i++) {
-            Serial.print(combos.resetCombo[i]);
-            if (i < size - 1) {
-                Serial.print(", ");
-            }
-        }
+        printCombo(combos.resetCombo, size);
         Serial.println();
     }
 }
 
 void saveNewLongResetCombo(int* newCombo, size_t size) {
-    if (size != 4) {
+    if (size != COMBO_SIZE) {
         return;
     }
     for (size_t i = 0; i < size; i++) {
@@ -46,12 +50,7 @@ void saveNewLongResetCombo(int* newCombo, size_t size) {
     EEPROM.put(EEPROM_ADDR, combos);
     if (debug) {
         Serial.print("New long reset combo saved: ");
-        for (size_t i = 0; i < size; i++) {
-            Serial.print(combos.longResetCombo[i]);
-            if (i < size - 1) {
-                Serial.print(", ");
-            }
-        }
+        printCombo(combos.longResetCombo, size);
         Serial.println();
     }
 }
@@ -63,12 +62,7 @@ void loadCombos() {
     }
     if (debug) {
         Serial.print("Loaded reset combo: ");
-        for (size_t i = 0; i < 4; i++) {
-            Serial.print(combos.resetCombo[i]);
-            if (i < 3) {
-                Serial.print(", ");
-            }
-        }
+        printCombo(combos.resetCombo, COMBO_SIZE);
         Serial.println();
     }
 }
